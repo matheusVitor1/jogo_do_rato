@@ -1,0 +1,40 @@
+#include"stdafx.h"
+#define TAMANHO 7
+#include"ConstruirMapa.h"
+#include"MovimentacaoDoRato.h"
+#include <cstdio>
+#include <ctime>
+#include <Windows.h>
+
+void mostrarIntegrantesDoGrupo() {
+	cout << "Matheus Vitor / RA: 21322170" << endl;
+	
+	system ("pause");
+}
+
+
+int main()
+{
+	mostrarIntegrantesDoGrupo();
+	clock_t tempoInicial;
+	double duracao;
+	inicializadorAleatorio();
+	char tabuleiro[TAMANHO][TAMANHO];
+	int ratoLinha = rand() % (TAMANHO - 1), ratoColuna = rand() % (TAMANHO - 1);
+	int queijoLinha = rand() % (TAMANHO - 1), queijoColuna = rand() % (TAMANHO - 1);
+	limparTabuleiro(tabuleiro);
+	for (int i = 0; i < 10; i++)
+		criarParede(tabuleiro);
+	criarRato(tabuleiro, ratoLinha, ratoColuna);
+	criarQueijo(tabuleiro, queijoLinha, queijoColuna);
+	tempoInicial = clock();
+	
+	imprimirTabuleiro(tabuleiro);
+	if (movimentosRato(tabuleiro, ratoLinha, ratoColuna) == false) 
+		cout << "Nao foi possivel encontrar o queijo" << endl;
+	duracao = (clock() - tempoInicial) / (double)CLOCKS_PER_SEC;
+	cout << "\nTempo utilizado: " << duracao << "s \n";
+	return 0;
+}
+
+
