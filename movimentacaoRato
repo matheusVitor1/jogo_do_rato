@@ -1,0 +1,81 @@
+#ifndef MOVIMENTOS_H
+#define MOVIMENTOS_H
+
+
+int movimentosRato(char tabuleiro[TAMANHO][TAMANHO], int ratoLinha, int ratoColuna) 
+{
+	if (ratoLinha < 0 || ratoLinha >= TAMANHO || ratoColuna < 0 || ratoColuna >= TAMANHO) 
+	{
+		return false;
+	}
+	else if (tabuleiro[ratoLinha][ratoColuna] == '#') 
+	{
+		return false;
+	}
+	else if (tabuleiro[ratoLinha][ratoColuna] == 'C') 
+	{
+		return false;
+	}
+	else if (tabuleiro[ratoLinha][ratoColuna] == 'Q') 
+	{
+		tabuleiro[ratoLinha][ratoColuna] = 'R';
+		cout << "_____________" << endl;
+		cout << "\n";
+		imprimirTabuleiro(tabuleiro);
+		tabuleiro[ratoLinha][ratoColuna] = ' ';
+		return true;
+	}
+	else {
+		tabuleiro[ratoLinha][ratoColuna] = 'R';
+		cout << "_____________" << endl;
+		cout << "\n";
+		imprimirTabuleiro(tabuleiro);
+		tabuleiro[ratoLinha][ratoColuna] = 'C';
+		if (movimentosRato(tabuleiro, ratoLinha + 1, ratoColuna) != false) 
+		{
+			tabuleiro[ratoLinha][ratoColuna] = 'R';
+			cout << "_____________" << endl;
+			cout << "\n";
+			imprimirTabuleiro(tabuleiro);
+			tabuleiro[ratoLinha][ratoColuna] = ' ';
+			return true;
+		}
+		else if (movimentosRato(tabuleiro, ratoLinha - 1, ratoColuna) != false) 
+		{
+			tabuleiro[ratoLinha][ratoColuna] = 'R';
+			cout << "_____________" << endl;
+			cout << "\n";
+			imprimirTabuleiro(tabuleiro);
+			tabuleiro[ratoLinha][ratoColuna] = ' ';
+			return true;
+		}
+		else if (movimentosRato(tabuleiro, ratoLinha, ratoColuna - 1) != false) 
+		{
+			tabuleiro[ratoLinha][ratoColuna] = 'R';
+			cout << "_____________" << endl;
+			cout << "\n";
+			imprimirTabuleiro(tabuleiro);
+			tabuleiro[ratoLinha][ratoColuna] = ' ';
+			return true;
+		}
+		else if (movimentosRato(tabuleiro, ratoLinha, ratoColuna + 1) != false) 
+		{
+			tabuleiro[ratoLinha][ratoColuna] = 'R';
+			cout << "_____________" << endl;
+			cout << "\n";
+			imprimirTabuleiro(tabuleiro);
+			tabuleiro[ratoLinha][ratoColuna] = ' ';
+			return true;
+		}
+		else {
+			tabuleiro[ratoLinha][ratoColuna] = 'R';
+			cout << "_____________" << endl;
+			cout << "\n";
+			imprimirTabuleiro(tabuleiro);
+			tabuleiro[ratoLinha][ratoColuna] = ' ';
+			return false;
+		}
+	}
+}
+	
+#endif
