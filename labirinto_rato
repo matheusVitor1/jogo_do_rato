@@ -1,0 +1,76 @@
+#ifndef CONSTRUTOR_H
+#define CONSTRUTOR_H
+
+#include<iostream>
+#include<time.h>
+#include<stdlib.h>
+
+using namespace std;
+
+void inicializadorAleatorio()
+{
+	srand(time(NULL));
+}
+
+void limparTabuleiro(char tabuleiro[TAMANHO][TAMANHO], int linha = TAMANHO - 1)
+{
+	if (linha != 0)
+		limparTabuleiro(tabuleiro, linha - 1);
+	for (int i = 0; i < TAMANHO; i++)
+		tabuleiro[linha][i] = ' ';
+}
+
+void imprimirTabuleiro(char tabuleiro[TAMANHO][TAMANHO], int linha = TAMANHO - 1)
+{
+	if (linha != 0)
+		imprimirTabuleiro(tabuleiro, linha - 1);
+	for (int i = 0; i < TAMANHO; i++)
+		cout << tabuleiro[linha][i];
+	cout << endl;	
+	
+}
+
+void criarParede(char tabuleiro[TAMANHO][TAMANHO])
+{
+	int x, y;
+	x = rand() % (TAMANHO - 1);
+	y = rand() % (TAMANHO - 1);
+	if (tabuleiro[y][x] != ' ') 
+	{
+		criarParede(tabuleiro);
+	}
+	else
+		tabuleiro[y][x] = '#';
+
+}
+
+void criarRato(char tabuleiro[TAMANHO][TAMANHO], int& ratoLinha, int& ratoColuna)
+{
+
+	if (tabuleiro[ratoLinha][ratoColuna] != ' ')
+	{
+		ratoLinha = rand() % (TAMANHO - 1);
+		ratoColuna = rand() % (TAMANHO - 1);
+		criarRato(tabuleiro, ratoLinha, ratoColuna);
+	}
+	else
+		tabuleiro[ratoLinha][ratoColuna] = 'R';
+}
+
+void criarQueijo(char tabuleiro[TAMANHO][TAMANHO], int &queijoLinha, int &queijoColuna)
+{
+
+	if (tabuleiro[queijoLinha][queijoColuna] != ' ')
+	{
+		queijoLinha = rand() % (TAMANHO - 1);
+		queijoColuna = rand() % (TAMANHO - 1);
+		criarQueijo(tabuleiro, queijoLinha, queijoColuna);
+	}
+	else
+		tabuleiro[queijoLinha][queijoColuna] = 'Q';
+}
+
+
+
+#endif // !CONSTRUTOR
+
